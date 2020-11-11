@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .title {
+            font-family: fantasy;
+            text-align: center;
+            font-size: 100px;
+            margin-bottom: 0px;
+            color: white;
+            border: 4px solid 	#252523;
+            background-color: #54554f;
+        }
+
+        .sub {
+            border: 2px solid 	#252523;
+            text-align: center;
+            font-size: 60px;
+            background-color: #838079;
+            color: white;
+        }
+
+        /* Style the form - display items horizontally */
+        .form-inline {
+            flex-flow: row;
+            align-items: center;
+            align-self: center;
+            align-content: center;
+            background-color: #79a1c3;
+            margin: 5% auto 15% auto;
+            border: 1px solid #252523;
+            height: auto;
+            width: 1000px;
+            box-sizing: border-box;
+        }
+
+        
+
+        /* Add some margins for each label */
+        .form-inline label {
+            align-items: center;
+        }
+
+        /* Style the input fields */
+        .attribute-input {
+            vertical-align: middle;
+            margin: 5px 10px 5px 0;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        /* Style the submit button */
+        .form-inline button {
+            font-family: Helvetica;
+            background-color: #54554f;
+            color: white;
+            padding: 14px 20px;
+            border: 4px solid 	#252523;
+            cursor: pointer;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        .form-inline button:hover {
+            background-color: #909287;
+            color: rgb(255, 255, 255);
+        }
+
+        .character-info{
+            border: 2px solid black;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .group{
+            display: inline-block;
+            padding: 5px;
+            text-align: left;
+        }
+
+        .attribute-section{
+            border: 2px solid black;
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .attribute-input{
+            border-radius: 30%;
+            border: 1px solid silver;
+            padding: 20px; 
+            width: 55px;
+            height: 38px;
+            text-align: center;
+            resize: none;
+            font-size: 20px;        
+        } 
+
+        .name-input{
+            font-size: 30px;
+            color: slategray;
+            border: none;
+            resize: none;
+            font-weight: bold;
+            padding: 15px;
+        }
+
+        .level-input{
+            border-radius: 50%;
+            border: 2px solid black;
+            padding: 15px; 
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            resize: none;
+            font-size: 25px;
+            margin-right: 15px;
+            margin-top: 10px;
+        }
+  
+        .character-heading{
+            border: 2px solid black;
+        }
+
+        .character-name{
+            padding: 10px;
+            padding-bottom: 0;
+            display: inline-block;
+        }
+
+        .health{
+            float: right;
+            padding: 20px;
+        }
+
+        .bonus-input{
+            border-radius: 30%;
+            border: 1px solid silver;
+            padding: 5px;
+            width: 23px;
+            height: 18px;
+            text-align: center;
+            resize: none;
+            font-size: 15px;
+            position: relative;
+            right: 45px;
+            top: 40px;
+        }
+
+        .skills{
+            border: 1px solid black;
+            height: 750px;
+            width: 20%;
+            text-align: left;
+            float: left;
+            background-color: lightgray;
+        }
+
+        .others{
+            border: 1px solid black;
+            background-color: lightgray;
+            width: 20%;
+            text-align: left;
+            float: left;
+        }
+
+        .list-item{
+            border-radius: 20%;
+            width: 30px;
+            height: 20px;
+            resize: none;
+            font-size: 15px;
+            position: relative;
+            top: 5px;
+            left: 5px;
+            text-align: center;
+        }
+
+        .blank{
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 5px;
+            text-align: right;
+        }
+
+        .attribute-title{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #54554f;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 5px;
+            border-radius: 10%;
+            position: relative;
+            top: 2px;
+        }
+
+        .subsection-title{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #54554f;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .aip{
+            border: 1px solid black;
+            background-color: lightgray;
+            float: right;
+            padding-top: 10px;
+            width: 39.2%;
+            text-align: center;
+        }
+
+        .saving-throws{
+            border: 1px solid black;
+            background-color: lightgray;
+            display: inline-block;
+            width: 20%;
+            text-align: left;
+        }
+
+        .pibf{
+            float: right;
+            border: 1px solid black;
+            background-color: lightgray;
+            width: 39.2%;
+            text-align: center;
+            position: relative;
+            bottom: 48px;
+        }
+
+        .subsection-large-title{
+            width: 390px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: slategray;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 5px;
+        }
+        .big-box{
+            height: 100px;
+            width: 380px;
+            resize: none;
+        }
+        .hit-dice{
+            border: 1px solid black;
+            background-color: lightgray;
+            height: 118px;
+            width: 20%;
+            text-align: left;
+            float: left;
+            position: relative;
+            bottom: 115px;
+        }
+        .hit-dice-box{
+            border-radius: 10%;
+            border: 1px solid silver;
+            padding: 20px; 
+            width: 75%;
+            height: 35px;
+            text-align: center;
+            resize: none;
+            font-size: 20px;
+        }
+
+        /*
+        .attacks{
+            border: 1px solid black;
+            text-align: center;
+            float: left;
+            border: 1px solid black;
+            background-color: lightgray;
+            width: 40.2%;
+            position: relative;
+            bottom: 123px;
+            height: auto;
+        }
+        
+        */
+        .attacks{
+            border: 1px solid black;
+            text-align: center;
+            float: left;
+            border: 1px solid black;
+            background-color: lightgray;
+            width: 402px;
+            position: relative;
+            bottom: 123px;
+            right: 2.25px;
+            height: auto;
+        }
+        
+
+        .attack-attributes{
+            background-color: lightgray;
+            float: left;
+            padding-top: 10px;
+            text-align: center;
+            padding-left: 24px;
+        }
+
+        .attack-input{
+            margin-top: 10px;
+            width: 80px;
+            resize: none;
+        }
+        
+        .languages{
+            border: 1px solid black;
+            text-align: center;
+            float: right;
+            border: 1px solid black;
+            background-color: lightgray;
+            width: 40.2%;
+            position: relative;
+            bottom: 123px;
+            height: auto;
+        }
+
+        .formbutton {
+            margin: 0px 20px;
+            width: 50%;
+        }
+        
+        .cancelbutton {
+            background-color: darkred;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px 15px;
+            margin: 15px 0;
+            border: 1px solid silver;
+            box-sizing: border-box;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        button {
+            font-family: Helvetica;
+            background-color: slategray;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: silver;
+            color: darkslategray
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            align-content: space-around;
+        }
+
+        .form {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,.5); 
+            padding-top: 100px;
+        }
+
+        .form-contents {
+            background-color: white;
+            margin: 5% auto 15% auto;
+            border: 1px solid silver;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .addmelee{
+            display: none;
+        }
+
+        .rightAlign {
+            text-align: right;
+        }
+
+        .leftAlign {
+            text-align: left;
+        }
+
+        .inventoryTable {
+            border: 1px solid slategray;
+            width: 100%;
+        }
+
+        .abilities{
+            resize: none;
+            height: 44px;
+            position: relative;
+            top: 20px;
+        }
+
+        .background-input{
+            min-width: 900px;
+            min-height: 100px;
+        }
+
+        .size-box{
+            border-radius: 10%;
+            border: 1px solid silver;
+            padding-top: 10px;
+            margin-right: 20px; 
+            width: 160px;
+            height: 38px;
+            text-align: center;
+            resize: none;
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        .vision-box{
+            border-radius: 10%;
+            border: 1px solid silver;
+            padding-top: 10px;
+            margin-right: 20px; 
+            width: 100px;
+            height: 38px;
+            text-align: center;
+            resize: none;
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        .health-title{
+            font-family: Arial, Helvetica, sans-serif;
+            background: slategray;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 5px;
+            float: left; 
+            position: relative; 
+            right: 20px; 
+        }
+        
+        .mrsi{
+            height: auto;
+            width: 40.2%;
+            float: right;
+        }
+        
+        .exitbuttontext {
+            text-align: center;
+            font-size: 30px;
+            margin-top: 10px;
+            color: slategray;
+        }
+
+        .mainbutton {
+            width: 15%;
+            margin: 0px 20px;
+            font-size: 20px;
+            min-width: 300px;
+            font-family: Helvetica;
+            background-color: #54554f;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: 4px solid 	#252523;
+            cursor: pointer;
+        }
+
+        .mainbutton :hover {
+            width: 15%;
+            margin: 0px 20px;
+            font-size: 20px;
+            min-width: 300px;
+            font-family: Helvetica;
+            background-color: #909287;
+            color: rgb(255, 255, 255);
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: 4px solid 	#252523;
+            cursor: pointer;
+        }
+
+        .exittext {
+            font-size: 22px;
+            text-align: center;
+        }
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1 class="title">Adventure Player</h1>
+    <h1 class="sub">Character Sheet</h1>
+    <div class="row">
+        <button type="button" onclick="document.getElementById('backbutton').style.display='block'" class="mainbutton">Exit Sheet</button>
+    </div>
+    
+    <form class="form-inline" action="/SaveSheet" method= "post">
+        <button type="submit">Save</button>
+        
+        <div class="character-heading">
+            <div class="character-name">
+                <label for="name" class="subsection-title" style="font-size: 20px">Character Name</label> <br />
+                <textarea class="name-input" name="playerName">{{ character_name }}</textarea>   
+            </div>
+    
+            <div class="health">
+                <div class="group">
+                    <label for="level" class="health-title">Current Health</label> <br />
+                    <textarea class="level-input" name="current_health">{{ current_health }}</textarea>
+                </div>
+                <div class="group">
+                    <label for="level" class="health-title" style="left: 1px;">Max Health</label> <br />
+                    <textarea class="level-input" name="max_health">{{ max_health }}</textarea>
+                </div>
+            </div>
+        </div>
+        
+    
+        <div class="character-info">
+            <div class="group">
+                <label for="level" class="attribute-title">Level</label> <br />
+                <textarea class="level-input" name="level">{{ level }}</textarea>
+            </div>
+            <div class="group">
+                <label for="race" class="subsection-title" style="position: relative;
+                top: 10px;">Race</label> <br />
+                <select name="race">
+                    <option value="{{pRace}}" selected>{{pRace}}</option>
+                    {% for race in all_races %}
+                        <option value="{{race[0]}}">{{race[0]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="group">
+                <label for="class" class="subsection-title" style="position: relative;
+                top: 10px;">Class</label> <br />
+                <select name="class">
+                    <option value="{{pClass}}" selected>{{pClass}}</option>
+                    {% for class in all_classes %}
+                        <option value="{{class[0]}}">{{class[0]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="group">
+                <label for="alignment" class="subsection-title" style="position: relative;
+                top: 10px;">Alignment</label> <br />
+                <select name="alignment">
+                    <option value="{{alignment}}" selected>{{alignment}}</option>
+                    {% for alignment_ in all_alignments %}
+                        <option value="{{alignment_}}">{{alignment_}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="group">
+                <label for="background" class="subsection-title" style="position: relative;
+                top: 16px;">Class Abilities</label> <br />
+                <textarea class="abilities" name="classAbilities" readonly>{{ classAbilities }}</textarea>
+            </div>
+            <div class="group">
+                <label for="background" class="subsection-title" style="position: relative;
+                top: 16px;">Race Abilities</label> <br />
+                <textarea class="abilities" name="raceAbilities" readonly>{{ raceAbilities }}</textarea>
+            </div>
+            <div class="group">
+                <label for="background" class="subsection-title">Background</label> <br />
+                <textarea class="background-input" name="background">{{ background }}</textarea>
+            </div>
+        </div>
+
+        <div class="attribute-section">
+            <div class="group">
+                <label for="strength" class="attribute-title">Strength</label> <br />
+                <textarea class="attribute-input" name="Strength">{{ Strength }}</textarea>
+                <textarea class="bonus-input" name="StrengthMOD" readonly>{{ StrengthMOD }}</textarea>
+            </div>
+            <div class="group">
+                <label for="dexterity" class="attribute-title">Dexterity</label> <br />
+                <textarea class="attribute-input" name="Dexterity">{{ Dexterity }}</textarea>
+                <textarea class="bonus-input" name="DexterityMOD" readonly>{{ DexterityMOD }}</textarea>
+            </div>
+            <div class="group">
+                <label for="constitution" class="attribute-title">Constitution</label> <br />
+                <textarea class="attribute-input" name="Constitution">{{ Constitution }}</textarea>   
+                <textarea class="bonus-input" name="ConstitutionMOD" readonly>{{ ConstitutionMOD }}</textarea>          
+            </div>
+            <div class="group">
+                <label for="intelligence" class="attribute-title">Intelligence</label> <br />
+                <textarea class="attribute-input" name="Intelligence">{{ Intelligence }}</textarea>
+                <textarea class="bonus-input" name="IntelligenceMOD" readonly>{{ IntelligenceMOD }}</textarea>             
+            </div>
+            <div class="group">
+                <label for="wisdom" class="attribute-title">Wisdom</label> <br />
+                <textarea class="attribute-input" name="Wisdom">{{ Wisdom }}</textarea>
+                <textarea class="bonus-input" name="WisdomMOD" readonly>{{ WisdomMOD }}</textarea>
+            </div>
+            <div class="group">
+                <label for="charisma" class="attribute-title">Charisma</label> <br />
+                <textarea class="attribute-input" name="Charisma">{{ Charisma }}</textarea>
+                <textarea class="bonus-input" name="CharismaMOD" readonly>{{ CharismaMOD }}</textarea>
+            </div>
+        </div>
+        
+        <div class="skills">
+            <div class="subsection-title">
+                Skills
+            </div>
+            <div class="blank">
+                <label for="acrobatics">Acrobatics</label>
+                <textarea class="list-item" name="acrobatics">{{ acrobatics }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="animal-handling">Animal Handling</label>
+                <textarea class="list-item" name="animal_handling">{{ animal_handling }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="arcana">Arcana</label>
+                <textarea class="list-item" name="arcana">{{ arcana }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="athletics">Athletics</label>
+                <textarea class="list-item" name="athletics">{{ athletics }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="deception">Deception</label>
+                <textarea class="list-item" name="deception">{{ deception }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="history">History</label>
+                <textarea class="list-item" name="history">{{ history }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="insight">Insight</label>
+                <textarea class="list-item" name="insight">{{ insight }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="intimidation">Intimidation</label>
+                <textarea class="list-item" name="intimidation">{{ intimidation }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="investigation">Investigation</label>
+                <textarea class="list-item" name="investigation">{{ investigation }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="medicine">Medicine</label>
+                <textarea class="list-item" name="medicine">{{ medicine }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="nature">Nature</label>
+                <textarea class="list-item" name="nature">{{ nature }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="perception">Perception</label>
+                <textarea class="list-item" name="perception">{{ perception }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="performance">Performance</label>
+                <textarea class="list-item" name="performance">{{ performance }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="persuassion">Persuasion</label>
+                <textarea class="list-item" name="persuasion">{{ persuasion }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="religion">Religion</label>
+                <textarea class="list-item" name="religion">{{ religion }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="slight-of-hand">Slight of Hand</label>
+                <textarea class="list-item" name="slight_of_hand">{{ slight_of_hand }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="stealth">Stealth</label>
+                <textarea class="list-item" name="stealth">{{ stealth }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="survival">Survival</label>
+                <textarea class="list-item" name="survival">{{ survival }}</textarea>
+            </div>
+        </div>
+
+        <div class="others">
+            <div class="subsection-title">
+                Other Stats
+            </div>
+            <div class="blank">
+                <label for="inspiration">Inspiration</label>
+                <textarea class="list-item" name="inspiration">{{ inspiration }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="passive-perception">Passive Perception</label>
+                <textarea class="list-item" name="passive_perception">{{ passive_perception }}</textarea>
+            </div>
+            <div class="blank" style="margin-bottom: 5px;">
+                <label for="proficiency-bonus">Proficiency Bonus</label> 
+                <textarea class="list-item" name="proficiency_bonus">{{ proficiency_bonus }}</textarea>
+            </div>
+        </div>
+
+        <div class="saving-throws">
+            <div class="subsection-title">
+                Saving Throws
+            </div>
+            <div class="blank">
+                <label for="saving_strength">Strength</label>
+                <textarea class="list-item" name="saving_strength">{{ saving_strength }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="saving_dexterity">Dexterity</label>
+                <textarea class="list-item" name="saving_dexterity">{{ saving_dexterity }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="saving_constitution">Constitution</label>
+                <textarea class="list-item" name="saving_constitution">{{ saving_constitution }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="saving_wisdom">Wisdom</label>
+                <textarea class="list-item" name="saving_wisdom">{{ saving_wisdom }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="saving_intelligence">Intelligence</label>
+                <textarea class="list-item" name="saving_intelligence">{{ saving_intelligence }}</textarea>
+            </div>
+            <div class="blank">
+                <label for="saving_charisma">Charisma</label>
+                <textarea class="list-item" name="saving_charisma">{{ saving_charisma }}</textarea>
+            </div>
+        </div>
+        <div class="aip">
+            <div class="group">
+                <label for="armor_class" class="attribute-title">Armor Class</label> <br />
+                <textarea class="attribute-input" name="armor_class">{{ armor_class }}</textarea>
+                
+            </div>
+            <div class="group">
+                <label for="initiative" class="attribute-title">Initiative</label> <br />
+                <textarea class="attribute-input" name="initiative">{{ initiative }}</textarea>
+                
+            </div>
+            <div class="group">
+                <label for="speed" class="attribute-title">Speed</label> <br />
+                <textarea class="attribute-input" name="speed" readonly>{{ speed }}</textarea>
+                
+            </div>
+            <div class="group">
+                <label for="size" class="attribute-title">Size</label> <br />
+                <textarea class="size-box" name="size" readonly>{{ size }}</textarea>
+                
+            </div>
+            <div class="group">
+                <label for="darkvision" class="attribute-title">Dark Vision</label> <br />
+                {% if darkvision == None %}
+                    <textarea class="vision-box" name="darkvision" readonly>0 ft</textarea>
+                {% else %}
+                    <textarea class="vision-box" name="darkvision" readonly>{{ darkvision }}ft</textarea>
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="pibf">
+            <div class="subsection-title">
+                Personality
+            </div>
+            <textarea name="personality" class="big-box">{{ personality }}</textarea>
+            
+            <div class="subsection-title">
+                Ideals
+            </div>
+            <textarea name="ideals" class="big-box">{{ ideals }}</textarea>
+
+            <div class="subsection-title">
+                Bonds
+            </div>
+            <textarea name="bonds" class="big-box">{{ bonds }}</textarea>
+
+            <div class="subsection-title">
+                Flaws
+            </div>
+            <textarea name="flaws" class="big-box">{{ flaws }}</textarea>
+        
+            <div class="subsection-title">
+                Allies and Orgs
+            </div>
+            <textarea name="allies_and_orgs" class="big-box">{{ allies_and_orgs }}</textarea>
+            
+            <div class="subsection-title">
+                Languages
+            </div>
+            <textarea name="languages" class="big-box">{{ languages }}</textarea>
+            <div class="subsection-title">
+                Misc. Inventory
+            </div>
+            <textarea name="misc" class="big-box">{{ misc }}</textarea>
+        </div>
+
+        <div class="hit-dice">
+            <div class="subsection-title">
+                Hit Dice
+            </div>
+            <div class="blank">
+                <textarea class="hit-dice-box" spellcheck="false" name="hit_dice">{{ hit_dice }}</textarea>
+            </div>
+        </div>
+
+        <div class="mrsi">
+                <!------------------------------------------------------------------------------------------------------------------------->
+
+            <div class="attacks">
+                <div class="subsection-title" style="font-weight: bold;">
+                    Melee Weapons
+                </div>
+                    <div class="item-section">
+                        <div class="row">
+                            <button type="button" onclick="document.getElementById('addmelee').style.display='block'" class="invButton">Add Weapon</button>
+                            <button type="button" onclick="document.getElementById('delmelee').style.display='block'" class="invButton">Remove Weapon</button>
+                        </div>
+                        <table class="melee-weapons">
+                            {% for weapon in pMeleeweapons %}
+                            <tr>
+                                <table class="inventoryTable">
+                                    <tr>
+                                        <th class="leftAlign">{{weapon[1]}}</th>
+                                        <th class="rightAlign">{{weapon[4]}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">{{weapon[2]}}</td>
+                                        {% if weapon[15] == 1 %}
+                                            <td class="rightAlign">Thrown</td>
+                                        {% elif weapon[16] == 1 %}
+                                            <td class="rightAlign">Two Handed</td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">{{weapon[5]}}</td>
+                                        {% if weapon[15] == 1 and weapon[16] == 1 %}
+                                            <td class="rightAlign">Two Handed</td>
+                                        {% endif %}
+                                    </tr>
+                                    {% if weapon[17] != None %}
+                                    <tr>
+                                        <td class="leftAlign">Versatile: {{weapon[17]}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td class="leftAlign">Weight: {{weapon[6]}}</td>
+                                        {% if weapon[18] != None %}
+                                            <td class="rightAlign">Normal Range: {{weapon[18]}}</td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">Cost: {{weapon[3]}}</td>
+                                        {% if weapon[19] != None %}
+                                            <td class="rightAlign">Long Range: {{weapon[19]}}</td>
+                                        {% endif %}
+                                    </tr>
+                                </table>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+            </div>
+            <!------------------------------------------------------------------------------------------------------------------------->
+            <div class="attacks">
+                <div class="subsection-title" style="font-weight: bold;">
+                    Ranged Weapons
+                </div>
+                    <div class="item-section">
+                        <div class="row">
+                            <button type="button" onclick="document.getElementById('addranged').style.display='block'" class="invButton">Add Weapon</button>
+                            <button type="button" onclick="document.getElementById('delranged').style.display='block'" class="invButton">Remove Weapon</button>
+                        </div>
+                        <table class="melee-weapons">
+                            {% for weapon in pRangedweapons %}
+                            <tr>
+                                <table class="inventoryTable">
+                                    <tr>
+                                        <th class="leftAlign">{{weapon[2]}}</th>
+                                        <th class="rightAlign">{{weapon[4]}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">{{weapon[1]}}</td>
+                                        {% if weapon[15] == 1 %}
+                                            <td class="rightAlign">Thrown</td>
+                                        {% elif weapon[16] == 1 %}
+                                            <td class="rightAlign">Two Handed</td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">{{weapon[5]}}</td>
+                                        {% if weapon[15] == 1 and weapon[16] == 1 %}
+                                            <td class="rightAlign">Two Handed</td>
+                                        {% endif %}
+                                    </tr>
+                                    {% if weapon[17] != None %}
+                                    <tr>
+                                        <td class="leftAlign">Versatile: {{weapon[17]}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if weapon[7] != None %}
+                                    <tr>        
+                                        <td class="leftAlign">Ammunition Required</td>    
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        {% if weapon[6] == None %}
+                                            <td class="leftAlign">Weight: N/A</td>
+                                        {% else %}
+                                            <td class="leftAlign">Weight: {{weapon[6]}}</td>
+                                        {% endif %}
+                                        {% if weapon[18] != None and weapon[19] != None %}
+                                            <td class="rightAlign">Normal Range: {{weapon[18]}}</td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        {% if weapon[3] == None %}
+                                            <td class="leftAlign">Cost: N/A</td>
+                                        {% else %}
+                                            <td class="leftAlign">Cost: {{weapon[3]}}</td>
+                                        {% endif %}
+                                        {% if weapon[19] != None %}
+                                            <td class="rightAlign">Long Range: {{weapon[19]}}</td>
+                                        {% endif %}
+                                        {% if weapon[18] != None and weapon[19] == None %}
+                                            <td class="rightAlign">Normal Range: {{weapon[18]}}</td>
+                                        {% endif %}
+                                    </tr>
+                                </table>
+                            </tr>
+                            {% endfor %}                    
+                        </table>
+                    </div>
+            </div>
+            <!------------------------------------------------------------------------------------------------------------------------->
+            <div class="attacks">
+                <div class="subsection-title" style="font-weight: bold;">
+                    Spells
+                </div>
+                    <div class="item-section">
+                        <div class="row">
+                            <button type="button" onclick="document.getElementById('addspell').style.display='block'" class="invButton">Add Spell</button>
+                            <button type="button" onclick="document.getElementById('delspell').style.display='block'" class="invButton">Remove Spell</button>
+                        </div>
+                        <table class="melee-weapons">
+                            {% for spell in pSpells %}
+                            <tr>
+                                <table class="inventoryTable">
+                                    <tr>
+                                        <th class="leftAlign">{{spell[1]}}</th>
+                                        <th class="rightAlign">Level: {{spell[2]}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">{{spell[3]}}</td>
+                                        <td class="rightAlign">
+                                            {% if spell[8] != None %}V{% endif %}
+                                            {% if spell[9] != None %}S{% endif %}
+                                            {% if spell[10] != None %}M{% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">Cast Time: {{spell[5]}}</td>
+                                        {% if spell[11] != None %}
+                                            <td class="rightAlign">{{spell[11]}}</td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">Range: {{spell[6]}}</td>
+                                        {% if spell[13] != None %}
+                                            <td class="rightAlign">Concentration</td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">Target Area: {{spell[7]}}</td>
+                                    </tr>
+                                    {% if spell[12] != None %}
+                                    <tr>
+                                        <td class="leftAlign">Cost: {{spell[12]}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td class="leftAlign">Duration: {{spell[14]}}</td>
+                                    </tr>
+                                    {% if spell[15] != None %}
+                                    <tr>        
+                                        <td class="leftAlign">Saving Throw: {{spell[15]}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% if spell[17] != None %}
+                                    <tr>
+                                        <td class="leftAlign">{{spell[17]}}</td>
+                                        {% if spell[16] != None %}
+                                        <td class="rightAlign">{{spell[16]}}</td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td class="leftAlign" colspan="2">Details: {{spell[20]}}</td>
+                                    </tr>
+                                    {% if spell[21] != None %}
+                                    <tr>
+                                        <td class="leftAlign" colspan="2">Level Modifier: {{spell[21]}}</td>
+                                    </tr>
+                                    {% endif %}
+                                </table>
+                            </tr>
+                            {% endfor %} 
+                        </table>
+                    </div>
+            </div>
+            <!------------------------------------------------------------------------------------------------------------------------->
+            <div class="attacks">
+                <div class="subsection-title" style="font-weight: bold;">
+                    Items
+                </div>
+                    <div class="item-section">
+                        <div class="row">
+                            <button type="button" onclick="document.getElementById('additem').style.display='block'" class="invButton">Add Item</button>
+                            <button type="button" onclick="document.getElementById('delitem').style.display='block'" class="invButton">Remove Item</button>
+                        </div>
+                        <table class="items">
+                            {% for item in pItems %}
+                            <tr>
+                                <table class="inventoryTable">
+                                    <tr>
+                                        <th class="leftAlign">{{item[1]}}</th>
+                                        <th class="rightAlign">{{item[3]}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="leftAlign">{{item[2]}}</td>
+                                        {% if item[4] != 0 %}
+                                            <td class="rightAlign">Attune</td>
+                                        {% endif %}
+                                    </tr>
+                                    {% if item[5] != 0 %}
+                                    <tr>
+                                        <td class="leftAlign">Cursed</td>
+                                    </tr>
+                                    {% endif %}
+                                </table>
+                            </tr>
+                            {% endfor %} 
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </form> 
+    </div>
+
+
+
+<!------------------------------------------------------------------------------------------------------------------------->
+    <div id="addmelee" class="form">
+        <form class="form-contents" action="/AddMeleeWeapon" method="post">
+            <div class="container">
+                <label for="id"><b>Weapon Name</b></label>
+                <select name="id" required>
+                    {% for meleeWeapon in all_meleeweapons %}
+                        <option value="{{meleeWeapon[0]}}">{{meleeWeapon[1]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Add</button>
+                    <button type="button" onclick="document.getElementById('addmelee').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="delmelee" class="form">
+        <form class="form-contents" action="/RemoveMeleeWeapon" method="post">
+            <div class="container">
+                <label for="id"><b>Item Name</b></label>
+                <select name="id" required>
+                    {% for meleeWeapon in pMeleeweapons %}
+                        <option value="{{meleeWeapon[0]}}">{{meleeWeapon[1]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Remove</button>
+                    <button type="button" onclick="document.getElementById('delmelee').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+<!------------------------------------------------------------------------------------------------------------------------->
+
+    <div id="addranged" class="form">
+        <form class="form-contents" action="/AddRangedWeapon" method="post">
+            <div class="container">
+                <label for="id"><b>Weapon Name</b></label>
+                <select name="id" required>
+                    {% for rangedWeapon in all_rangedweapons %}
+                        <option value="{{rangedWeapon[0]}}">{{rangedWeapon[2]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Add</button>
+                    <button type="button" onclick="document.getElementById('addranged').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="delranged" class="form">
+        <form class="form-contents" action="/RemoveRangedWeapon" method="post">
+            <div class="container">
+                <label for="id"><b>Item Name</b></label>
+                <select name="id" required>
+                    {% for rangedWeapon in pRangedweapons %}
+                        <option value="{{rangedWeapon[0]}}">{{rangedWeapon[2]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Remove</button>
+                    <button type="button" onclick="document.getElementById('delranged').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<!------------------------------------------------------------------------------------------------------------------------->
+
+    <div id="addspell" class="form">
+        <form class="form-contents" action="/AddSpell" method="post">
+            <div class="container">
+                <label for="id"><b>Spell Name</b></label>
+                <select name="id" required>
+                    {% for spell in all_spells %}
+                        <option value="{{spell[0]}}">{{spell[1]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Add</button>
+                    <button type="button" onclick="document.getElementById('addspell').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="delspell" class="form">
+        <form class="form-contents" action="/RemoveSpell" method="post">
+            <div class="container">
+                <label for="id"><b>Spell Name</b></label>
+                <select name="id" required>
+                    {% for spell in pSpells %}
+                        <option value="{{spell[0]}}">{{spell[1]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Remove</button>
+                    <button type="button" onclick="document.getElementById('delspell').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<!------------------------------------------------------------------------------------------------------------------------->
+    <div id="additem" class="form">
+        <form class="form-contents" action="/AddItem" method="post">
+            <div class="container">
+                <label for="id"><b>Item Name</b></label>
+                <select name="id" required>
+                    {% for item in all_items %}
+                        <option value="{{item[0]}}">{{item[1]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Add</button>
+                    <button type="button" onclick="document.getElementById('additem').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="delitem" class="form">
+        <form class="form-contents" action="/RemoveItem" method="post">
+            <div class="container">
+                <label for="id"><b>Item Name</b></label>
+                <select name="id" required>
+                    {% for item in pItems %}
+                        <option value="{{item[0]}}">{{item[1]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Remove</button>
+                    <button type="button" onclick="document.getElementById('delitem').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+<!------------------------------------------------------------------------------------------------------------------------->
+    <div id="backbutton" class="form">
+        <form class="form-contents" action="/BackDashboard" method="post">
+            <div class="container">
+                <p class="exittext">Are you sure you want to exit? (Did you save?)</p>
+                <div class="row">
+                    <button type="submit" class="formbutton">Exit Sheet</button>
+                    <button type="button" onclick="document.getElementById('backbutton').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

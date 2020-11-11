@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .title {
+            /*font-family: Georgia;*/
+            font-family: fantasy;
+            text-align: center;
+            font-size: 100px;
+            margin-bottom: 0px;
+            color: white;
+            border: 4px solid 	#252523;
+            background-color: #54554f;
+        }
+
+        .sub {
+            border: 2px solid 	#252523;
+            text-align: center;
+            font-size: 60px;
+            background-color: #838079;
+            color: white;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 15px 15px;
+            margin: 15px 0;
+            border: 1px solid silver;
+            box-sizing: border-box;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px 15px;
+            margin: 15px 0;
+            border: 1px solid silver;
+            box-sizing: border-box;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        button {
+            font-family: Helvetica;
+            background-color: #54554f;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: 4px solid 	#252523;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #909287;
+            color: rgb(255, 255, 255);
+        }
+
+        .mainbutton {
+            width: 15%;
+            margin: 0px 20px;
+            font-size: 20px;
+            min-width: 300px;
+        }
+        
+        .dashboardbutton {
+            background-color: white;
+            color: black;
+            width: 100%;
+            padding: 5px 0 5px 0;
+            font-size: 15px
+        } 
+
+        .formbutton {
+            margin: 0px 20px;
+            width: 50%;
+        }
+        
+        .cancelbutton {
+            background-color: darkred;
+        }
+        
+        .row {
+            display: flex;
+            justify-content: center;
+            align-content: space-around;
+        }
+        
+        .form {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,.5); 
+            padding-top: 100px;
+        }
+
+        .form-contents {
+            background-color: white;
+            margin: 5% auto 15% auto;
+            border: 1px solid silver;
+            width: 50%;
+            box-sizing: border-box;
+        } 
+
+        table {
+            border: 4px solid 	#252523;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+            margin: 50px;
+        }
+
+        .partytable {
+            margin-bottom: 0px;
+        }
+
+        td {
+            font-family: comic;
+            font-weight: bold;
+            border: 1px solid black;
+            text-align: left;
+            padding: 8px;
+            font-size: 18px;
+        }
+
+        th {
+            background-color: slategray;
+            color: white;
+            font-size: 20px;
+            padding: 8px;
+            text-align: left;
+            font-size: 20px;
+        }
+        
+        .averageLevel {
+            text-align: right;
+        }
+
+        .exittext {
+            font-size: 22px;
+            text-align: center;
+        }
+
+        .heading{
+            align-content: center;
+        }
+        
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="heading">
+        <h1 class="title">Adventure Player</h1>
+        <h1 class="sub">Character Dashboard</h1>
+    </div>
+    
+    <div class="row">
+        <button onclick="document.getElementById('createchar').style.display='block'" class="mainbutton">Create Character</button>
+        <button onclick="document.getElementById('viewchar').style.display='block'" class="mainbutton">View Character</button>
+        <button onclick="document.getElementById('delchar').style.display='block'" class="mainbutton">Delete Character</button>
+    </div>
+    <div id="createchar" class="form">
+        <form class="form-contents" action="/CreateCharacter" method="post">
+
+            <div class="container">
+                <label for="name"><b>Character Name</b></label>
+                <input type="text" placeholder="Enter Character Name" name="name" required>
+                <div class="row">
+                    <button type="submit" class="formbutton">Create</button>
+                    <button type="button" onclick="document.getElementById('createchar').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="viewchar" class="form">
+        <form class="form-contents" action="/sheet" method="post">
+            <div class="container">
+                <label for="id"><b>Character Name</b></label>
+                <select name="id" required>
+                {% for row in rows %}
+                    <option value="{{row[0]}}">{{row[1]}}</option>
+                {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">View</button>
+                    <button type="button" onclick="document.getElementById('viewchar').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="delchar" class="form">
+        <form class="form-contents" action="/DeleteCharacter" method="post">
+            <div class="container">
+                <label for="id"><b>Character Name</b></label>
+                <select name="id" required>
+                    {% for row in rows %}
+                        <option value="{{row[0]}}">{{row[1]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Delete</button>
+                    <button type="button" onclick="document.getElementById('delchar').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class ="row">
+        <table>
+            <tr>
+                <th>Character Name</th>
+                <th>Level</th>
+                <th>Race</th>
+                <th>Class</th>
+            </tr>
+            {% for row in rows %}
+            <tr>
+                <td>{{row[1]}}</td>  
+                <td>{{row[2]}}</td>
+                <td>{{row[4]}}</td>
+                <td>{{row[3]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="row">
+        <button onclick="document.getElementById('createparty').style.display='block'" class="mainbutton">Create Party</button>
+        <button onclick="document.getElementById('delparty').style.display='block'" class="mainbutton">Delete Party</button>
+    </div>
+    <br/>
+    <div class="row">
+        <button onclick="document.getElementById('joinparty').style.display='block'" class="mainbutton">Join Party</button>
+        <button onclick="document.getElementById('leaveparty').style.display='block'" class="mainbutton">Leave Party</button>
+    </div>
+    <div id="createparty" class="form">
+        <form class="form-contents" action="/createparty" method="post">
+            <div class="container">
+                <label for="PartyName"><b>Party Name</b></label>
+                <input type="text" placeholder="Enter Party Name" name="PartyName" required>
+                <div class="row">
+                    <button type="submit" class="formbutton">Create</button>
+                    <button type="button" onclick="document.getElementById('createparty').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="joinparty" class="form">
+        <form class="form-contents" action="/joinparty" method="post">
+            <div class="container">
+                <label for="id"><b>Character Name</b></label>
+                <select name="id" required>
+                    {% for row in rows %}
+                        <option value="{{row[0]}}">{{row[1]}}</option>
+                    {% endfor %}
+                </select>
+                <label for="PartyName"><b>Party Name</b></label>
+                <select name="PartyName" required>
+                    {% for party in prows[0] %}
+                        <option value="{{party[0]}}">{{party[0]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Join</button>
+                    <button type="button" onclick="document.getElementById('joinparty').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="delparty" class="form">
+        <form class="form-contents" action="/delparty" method="post">
+            <div class="container">
+                <label for="PartyName"><b>Party Name</b></label>
+                <select name="PartyName" required>
+                    {% for party in prows[0] %}
+                        <option value="{{party[0]}}">{{party[0]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Delete</button>
+                    <button type="button" onclick="document.getElementById('delparty').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="leaveparty" class="form">
+        <form class="form-contents" action="/leaveparty" method="post">
+            <div class="container">
+                <label for="id"><b>Character Name</b></label>
+                <select name="id" required>
+                    {% for row in rows %}
+                        <option value="{{row[0]}}">{{row[1]}}</option>
+                    {% endfor %}
+                </select>
+                <label for="PartyName"><b>Party Name</b></label>
+                <select name="PartyName" required>
+                    {% for party in prows[0] %}
+                        <option value="{{party[0]}}">{{party[0]}}</option>
+                    {% endfor %}
+                </select>
+                <div class="row">
+                    <button type="submit" class="formbutton">Leave</button>
+                    <button type="button" onclick="document.getElementById('leaveparty').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="searchitems" class="form">
+        <form class="form-contents" action="/search" method="post">
+            <div class="container">
+                <label for="name"><b>Item Name</b></label>
+                <input type="text" placeholder="Enter Item Name" name="name">
+                <div class="row">
+                    <button type="submit" class="formbutton">Search</button>
+                    <button type="button" onclick="document.getElementById('searchitems').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="logout" class="form">
+        <form class="form-contents" action="/BackLogin" method="post">
+            <div class="container">
+                <p class="exittext">Are you sure you want to logout?</p>
+                <div class="row">
+                    <button type="submit" class="formbutton">Logout</button>
+                    <button type="button" onclick="document.getElementById('logout').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% for i in range(0,length) %}
+    <div class ="row">
+        <table class="partytable">
+            <tr>
+                <th>{{prows[0][i][0]}}</th>
+                <th class="averageLevel">Average Level: {{partyAverageLevels[i]}}</th>
+            </tr>
+            {% for mems in prows[1][i] %}
+            <tr>
+                <td>{{mems[0][0]}}</td>
+                <td class="rightAlign">{{mems[0][1]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endfor %}
+    <br></br>
+    <div class="row">
+        <button onclick="document.getElementById('searchitems').style.display='block'" class="mainbutton">Search All Items</button>
+    </div>
+    <br/>
+    <div class="row">
+        <button onclick="document.getElementById('logout').style.display='block'" class="mainbutton">Logout</button>
+    </div>
+    <br/>
+</body>
+</html>

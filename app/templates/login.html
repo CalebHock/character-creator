@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .title {
+            font-family: fantasy;
+            text-align: center;
+            font-size: 100px;
+            margin-bottom: 0px;
+            color: white;
+            border: 4px solid 	#252523;
+            background-color: #54554f;
+        }
+
+        .sub {
+            border: 2px solid 	#252523;
+            text-align: center;
+            font-size: 60px;
+            background-color: #838079;
+            color: white;
+        }
+
+        input[type=text], input[type=password], input[type=email] {
+            width: 100%;
+            padding: 15px 15px;
+            margin: 15px 0;
+            border: 1px solid silver;
+            box-sizing: border-box;
+        }
+
+        button {
+            font-family: Helvetica;
+            background-color: #54554f;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: 4px solid 	#252523;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #909287;
+            color: rgb(255, 255, 255);
+        }
+
+        .mainbutton {
+            width: 15%;
+            margin: 0px 20px;
+            font-size: 20px;
+            min-width: 300px;
+        }
+        
+        .formbutton {
+            margin: 0px 20px;
+            width: 50%;
+        }
+        
+        .cancelbutton {
+            background-color: darkred;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        .form {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,.5); 
+            padding-top: 100px;
+        }
+
+        .form-contents {
+            background-color: white;
+            margin: 5% auto 15% auto;
+            border: 1px solid silver;
+            width: 50%;
+            box-sizing: border-box;
+        }    
+        
+        .row {
+            display: flex;
+            justify-content: center;
+            align-content: space-around;
+        }
+
+        .message {
+            color: white;
+            background-color: rgba(0,0,0,.5);
+        }
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="login.css"> -->
+</head>
+<body>
+    <h1 class="title">Adventure Player</h1>
+    <h1 class="sub">Character Creater</h1>
+
+    <div class="row">
+        <button onclick="document.getElementById('signin').style.display='block'" class="mainbutton">Login</button>
+
+        <div id="signin" class="form">
+
+            <form class="form-contents" action="/checkdetails" method="post">
+
+                <div class="container">
+                    <label for="username"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="username" required>
+
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" required>
+                    <div class="row">
+                        <button type="submit" class="formbutton">Login</button>
+                        <button type="button" onclick="document.getElementById('signin').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <button onclick="document.getElementById('signup').style.display='block'" class="mainbutton">Sign Up</button>
+
+        <div id="signup" class="form">
+
+            <form class="form-contents" action="/savedetails" method="post">
+
+                <div class="container">
+                    <label for="email"><b>Email</b></label>
+                    <input type="email" placeholder="Enter Email" name="email" required>
+
+                    <label for="username"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="username" required>
+
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" required>
+
+                    <div class="row">
+                        <button type="submit" class="formbutton">Sign Up</button>
+                        <button type="button" onclick="document.getElementById('signup').style.display='none'" class="cancelbutton formbutton">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <p class="message">{{msg}}</p>
+    </div>
+</body>
+</html>
